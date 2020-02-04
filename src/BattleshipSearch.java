@@ -1,11 +1,13 @@
+//This class controls the flow of one game,
+//it calls all the different strategies and goes through them.
 public class BattleshipSearch {
     BattleshipSearch(Grid grid) {
         search(grid);
     }
 
-    public void search(Grid grid) {
-        boolean gridArr[][] = grid.getGrid();
-        SearchStrategy strategy = new HorizontalSweepStrategy();
+    private void search(Grid grid) {
+        boolean gridArr[][] = grid.getGrid();   //new grid set up
+        SearchStrategy strategy = new HorizontalSweepStrategy();    //first strategy started.
         strategy.search(gridArr);
         System.out.println("Strategy: " + strategy.strategyName());
         System.out.println("Number of cells searched: " + strategy.numberOfCellsSearched());

@@ -1,3 +1,6 @@
+//This strategy is a mix of random and horizontal search.
+//First it uses random numbers till it gets a hit and then it
+//searches the whole row for a ship.
 import java.util.Random;
 
 public class StrategicSearch implements SearchStrategy {
@@ -18,25 +21,25 @@ public class StrategicSearch implements SearchStrategy {
     }
 
     public void search(boolean[][] grid) {
-        int hitcounter = 0;
+        int hitcounter = 0; //to keep track if we have hit all the ships
         Random rand = new Random();
         Grid checkedGrid = new Grid();
-        boolean checked[][] = checkedGrid.getGrid();
+        boolean checked[][] = checkedGrid.getGrid();    //need a checked grid to avoid checking the same cell twice.
         while (!submarineFound && !carrierFound) {
-            int randomOne = rand.nextInt(25);
+            int randomOne = rand.nextInt(25);   //generating randoms
             int randomTwo = rand.nextInt(25);
             if (!checked[randomOne][randomTwo]) {
                 checked[randomOne][randomTwo] = true;
-                if (grid[randomOne][randomTwo]) {
-                    for(int j = 0; j < 25; j++) {
+                if (grid[randomOne][randomTwo]) {   //if a hit is found,
+                    for(int j = 0; j < 25; j++) {   //the whole row is searched.
                         if (grid[randomOne][j]) {
                             hitcounter++;
                             if(hitcounter == 1)
-                                location  = "(" + randomOne + "," + j + ")";
+                                location  = "(" + randomOne + "," + j + ")";    //location is saved,
                         }
                         if (hitcounter == 1 && !carrierFound)
                             carrierLocation = location;
-                        if (hitcounter == 5) {
+                        if (hitcounter == 5) {              //and checked if its either a submarine or a carrier.
                             submarineFound = false;
                             carrierFound = true;
                             hitcounter = 0;
@@ -47,7 +50,7 @@ public class StrategicSearch implements SearchStrategy {
                         }
                     }
                 }
-                cells++;
+                cells++;    //counting cells visited.
             }
         }
     }

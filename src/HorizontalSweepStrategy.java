@@ -1,3 +1,5 @@
+//The most straightforward strategy, it just goes through every row
+//horizontally till it finds the ships.
 public class HorizontalSweepStrategy implements SearchStrategy {
     private int cells;
     private boolean carrierFound;
@@ -30,28 +32,28 @@ public class HorizontalSweepStrategy implements SearchStrategy {
 
     public void search(boolean[][] grid) {
         int hitcounter = 0;
-        search: {
+        search: {   //need this to break when both ships are found
             for (int i = 0; i < 25; i++) {
                 for (int j = 0; j < 25; j++) {
-                    if (grid[i][j]) {
+                    if (grid[i][j]) {   //if a hit is found,
                         hitcounter++;
                         if(hitcounter == 1)
-                            location  = "(" + i + "," + j + ")";
+                            location  = "(" + i + "," + j + ")"; //that location is saved,
                     }
-                    if (hitcounter == 1 && !carrierFound)
-                        carrierLocation = location;
+                    if (hitcounter == 1 && !carrierFound)   //then its checked if its either a
+                        carrierLocation = location; //carrier
                     if (hitcounter == 5) {
                         submarineFound = false;
                         carrierFound = true;
                         hitcounter = 0;
                     }
-                    if (!submarineFound && hitcounter == 3) {
+                    if (!submarineFound && hitcounter == 3) {   //or a submarine
                         submarineLocation = location;
                         submarineFound = true;
                     }
-                    if(carrierFound && submarineFound)
+                    if(carrierFound && submarineFound)  //loop is broken when both are found.
                         break search;
-                    cells++;
+                    cells++;        //counting cells checked.
                 }
             }
         }

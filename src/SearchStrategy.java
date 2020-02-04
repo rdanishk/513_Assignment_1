@@ -1,3 +1,4 @@
+//interface that all strategies adhere to.
 public interface SearchStrategy {
     public String strategyName();
     public int numberOfCellsSearched();
