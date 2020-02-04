@@ -3,6 +3,10 @@ import java.util.StringTokenizer;
 public class Grid {
     private boolean[][] grid;
 
+    public Grid() {
+        grid = new boolean[25][25];
+    }
+
     public Grid(String[] input) {
         grid = new boolean[25][25];
         populateGrid(input);

@@ -5,8 +5,10 @@ public class Battleships {
         String tokenizedInput[][] = inputHandler.tokenizer(input);
 
         for (int i = 0; i < 3; i++) {
+            System.out.println("Game " + (i + 1) + ":");
             Grid grid = new Grid(tokenizedInput[i]);
             BattleshipSearch game = new BattleshipSearch(grid);
+            System.out.println("-------------------\n");
         }
     }
 }

@@ -20,6 +20,14 @@ public class HorizontalSweepStrategy implements SearchStrategy {
         return cells;
     }
 
+    public String getSubmarineLocation() {
+        return submarineLocation;
+    }
+
+    public String getCarrierLocation() {
+        return carrierLocation;
+    }
+
     public void search(boolean[][] grid) {
         int hitcounter = 0;
         search: {
@@ -27,7 +35,8 @@ public class HorizontalSweepStrategy implements SearchStrategy {
                 for (int j = 0; j < 25; j++) {
                     if (grid[i][j]) {
                         hitcounter++;
-                        location  = "(" + i + "," + j + ")";
+                        if(hitcounter == 1)
+                            location  = "(" + i + "," + j + ")";
                     }
                     if (hitcounter == 1 && !carrierFound)
                         carrierLocation = location;
@@ -36,16 +45,15 @@ public class HorizontalSweepStrategy implements SearchStrategy {
                         carrierFound = true;
                         hitcounter = 0;
                     }
-                    if (!submarineFound) {
+                    if (!submarineFound && hitcounter == 3) {
                         submarineLocation = location;
                         submarineFound = true;
                     }
+                    if(carrierFound && submarineFound)
+                        break search;
                     cells++;
                 }
             }
         }
-
-        System.out.println(carrierLocation);
-        System.out.println(submarineLocation);
     }
 }
