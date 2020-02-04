@@ -6,7 +6,7 @@ public class Battleships {
 
         for (int i = 0; i < 3; i++) {
             Grid grid = new Grid(tokenizedInput[i]);
-
+            BattleshipSearch game = new BattleshipSearch(grid);
         }
     }
 }

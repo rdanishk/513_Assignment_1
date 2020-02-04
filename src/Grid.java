@@ -19,7 +19,7 @@ public class Grid {
         }
     }
 
-    private boolean[][] getGrid() {
+    public boolean[][] getGrid() {
         return grid;
     }
 }
